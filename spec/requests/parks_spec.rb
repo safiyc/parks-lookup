@@ -97,4 +97,13 @@ describe 'Parks-Lookup API', :type => :request do
       end
     end
   end
+
+  # test suite for DELETE /parks/:id
+  describe 'DELETE /parks/:id' do
+    before { delete "/parks/#{park_id}" }
+
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
+    end
+  end
 end

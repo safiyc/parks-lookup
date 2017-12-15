@@ -1,5 +1,5 @@
 class ParksController < ApplicationController
-  before_action :find_park, only: [:show, :update]
+  before_action :find_park, only: [:show, :update, :destroy]
 
 
   #GET /parks
@@ -23,6 +23,12 @@ class ParksController < ApplicationController
   # PUT /parks/:id
   def update
     @park.update(park_params)
+    head :no_content
+  end
+
+  # DELETE /parks/:id
+  def destroy
+    @park.destroy
     head :no_content
   end
 
