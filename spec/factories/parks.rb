@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :park do
-    name "MyString"
-    state "MyString"
+    name { Faker::Lorem.word }
+    state { Faker::Address.state }
   end
 end
