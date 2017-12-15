@@ -3,7 +3,8 @@ class ParksController < ApplicationController
 
   #GET /parks
   def index
-    @parks = Park.all
+    # on index.html.erb, to add links to pages: <% will_paginate @parks %>
+    @parks = Park.paginate(:page => params[:page], :per_page => 5)
     @park_random = Park.random
 
     name = params[:name]
@@ -40,7 +41,6 @@ class ParksController < ApplicationController
         message: "The park has been deleted."
       }
     end
-    # head :no_content
   end
 
   private
