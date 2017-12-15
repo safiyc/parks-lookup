@@ -5,12 +5,13 @@ class ParksController < ApplicationController
   #GET /parks
   def index
     @parks = Park.all
+    name = params[:name]
+    @parks = Park.random
     json_response(@parks)
   end
 
   # GET /parks/:id
   def show
-    # @park = Park.find(params[:id])
     json_response(@park)
   end
 
