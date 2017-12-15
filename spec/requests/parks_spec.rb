@@ -51,4 +51,33 @@ describe 'Parks-Lookup API', :type => :request do
     end
   end
 
+  # test suite for POST /parks
+  describe 'POST /parks' do
+    # valid payload
+    let(:valid_attributes) { { name: 'Yellowstone National Park', state: 'Wyoming'} }
+
+    context 'when the request is valid' do
+      before { post '/parks', params: valid_attributes }
+
+      it 'creates a park' do
+        expect(json['name']).to eq('Yellowstone National Park')
+      end
+
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+    end
+
+    context 'when the request is invalid' do
+      before { post '/parks', params: { name: 'Yosemite National Park' } }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body).to match(/Validation failed: State can't be blank/)
+      end
+    end
+  end
 end
