@@ -80,4 +80,21 @@ describe 'Parks-Lookup API', :type => :request do
       end
     end
   end
+
+  # test suite for PUT /parks/:id
+  describe 'PUT /parks/:id' do
+    let(:valid_attributes) { { name: 'Yosemite National Park' } }
+
+    context 'when the record exists' do
+      before { put "/parks/#{park_id}", params: valid_attributes }
+
+      it 'updates the record' do
+        expect(response.body).to be_empty
+      end
+
+      it 'returns status code 204' do
+        expect(response).to have_http_status(204)
+      end
+    end
+  end
 end

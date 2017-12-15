@@ -1,5 +1,5 @@
 class ParksController < ApplicationController
-  before_action :find_park, only: [:show]
+  before_action :find_park, only: [:show, :update]
 
 
   #GET /parks
@@ -18,6 +18,12 @@ class ParksController < ApplicationController
   def create
     @park = Park.create!(park_params)
     json_response(@park, :created)
+  end
+
+  # PUT /parks/:id
+  def update
+    @park.update(park_params)
+    head :no_content
   end
 
   private
