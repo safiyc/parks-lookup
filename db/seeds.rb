@@ -8,7 +8,7 @@ class Seed
   def generate_parks
     Park.destroy_all
 
-    20.times do |i|
+    100.times do |i|
       park = Park.create!(
       name: Faker::Lorem.word,
       state: Faker::Address.state
