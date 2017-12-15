@@ -89,11 +89,11 @@ describe 'Parks-Lookup API', :type => :request do
       before { put "/parks/#{park_id}", params: valid_attributes }
 
       it 'updates the record' do
-        expect(response.body).to be_empty
+        expect(response.body).to match("The park has been updated successfully.")
       end
 
-      it 'returns status code 204' do
-        expect(response).to have_http_status(204)
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
       end
     end
   end
@@ -102,8 +102,12 @@ describe 'Parks-Lookup API', :type => :request do
   describe 'DELETE /parks/:id' do
     before { delete "/parks/#{park_id}" }
 
-    it 'returns status code 204' do
-      expect(response).to have_http_status(204)
+    it 'deletes the record' do
+      expect(response.body).to match("The park has been deleted.")
+    end
+
+    it 'returns status code 200' do
+      expect(response).to have_http_status(200)
     end
   end
 end

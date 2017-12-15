@@ -1,12 +1,10 @@
 class ParksController < ApplicationController
   before_action :find_park, only: [:show, :update, :destroy]
 
-
   #GET /parks
   def index
     @parks = Park.all
-    name = params[:name]
-    @parks = Park.random
+    @park_random = Park.random
     json_response(@parks)
   end
 
@@ -23,14 +21,21 @@ class ParksController < ApplicationController
 
   # PUT /parks/:id
   def update
-    @park.update(park_params)
-    head :no_content
+    if @park.update!(park_params)
+      render status: 200, json: {
+        message: "The park has been updated successfully."
+      }
+    end
   end
 
   # DELETE /parks/:id
   def destroy
-    @park.destroy
-    head :no_content
+    if @park.destroy
+      render status: 200, json: {
+        message: "The park has been deleted."
+      }
+    end
+    # head :no_content
   end
 
   private
